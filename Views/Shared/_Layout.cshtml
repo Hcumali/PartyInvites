@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="~/Views/Shared/Partials/_MetaPartial.cshtml" />
+    <title>PARTY- @ViewData["Title"]</title>
+    <partial name="~/Views/Shared/Partials/_LinkPartial.cshtml" />
+</head>
+<body id="page-top">
+    <partial name="~/Views/Shared/Partials/_NavBarPartial.cshtml" />
+
+    @RenderSection("Header",false)
+
+    <section id="about">
+        <div class="container px-4">
+            <div class="row gx-4 justify-content-center">
+                <div class="col-lg-8">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <partial name="~/Views/Shared/Partials/_ScriptPartial.cshtml" />
+</body>
+</html>

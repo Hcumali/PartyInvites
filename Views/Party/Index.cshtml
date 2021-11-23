@@ -1,0 +1,29 @@
+﻿@model List<Party>
+@{
+    ViewData["Title"] = "Party";
+}
+
+<div style="float:right">
+    <a asp-controller="Party" asp-action="Create" class="btn btn-primary">Parti Oluştur</a>
+</div>
+
+@{
+    if (Model.Count == 0)
+    {
+        <h1>Henüz hiç parti yok.</h1>
+    }
+}
+
+@for (int i = 0; i < Model.Count; i++)
+{
+        <div class="card text-center" style="width: 18rem;padding:15px;margin:15px;align-items:center;">
+            <img src="~/assets/party.jpg" style="width:12rem;height:14rem;" class="card-img-top" alt="IMAGE_PARTY">
+            <div class="card-body" style="align-items:center">
+                <h6 class="card-title">@Model[i].PartyName</h6>
+                <label >@Model[i].PartyType</label><br />
+                <label >@Model[i].PartyDate.ToShortDateString()</label><br />
+                <label >@Model[i].TicketPrice $</label><br />
+            </div>
+            <a href="#" class="btn btn-primary">Sen de Katıl</a>
+        </div>
+}
