@@ -9,10 +9,12 @@ namespace PartyInvites.Models
 {
     public class Category : BaseEntity
     {
-        [Required(ErrorMessage = "Cannot be empty")]
+        [Required(ErrorMessage = "Kategori başlığı boş girilemez.")]
+        [StringLength(30, ErrorMessage = "Başlık 30 haneden fazla olamaz")]
         public string CategoryName { get; set; }
 
-        [Required(ErrorMessage = "Cannot be empty")]
+        [Required(ErrorMessage = "Kategori açıklaması boş girilemez.")]
+        [StringLength(150, ErrorMessage ="Açıklama 150 haneden fazla olamaz")]
         public string Description { get; set; }
     }
 }

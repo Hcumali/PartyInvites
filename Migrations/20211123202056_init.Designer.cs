@@ -10,7 +10,7 @@ using PartyInvites.Context;
 namespace PartyInvites.Migrations
 {
     [DbContext(typeof(CodeFirstContext))]
-    [Migration("20211123184834_init")]
+    [Migration("20211123202056_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,14 +30,16 @@ namespace PartyInvites.Migrations
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -67,7 +69,9 @@ namespace PartyInvites.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PartyName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(21)")
+                        .HasMaxLength(21);
 
                     b.Property<int>("PartyType")
                         .HasColumnType("int");
@@ -75,7 +79,7 @@ namespace PartyInvites.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TicketPrice")
+                    b.Property<int>("TicketPrice")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -106,7 +110,9 @@ namespace PartyInvites.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.HasKey("Id");
 
@@ -122,19 +128,21 @@ namespace PartyInvites.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Age")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
@@ -142,9 +150,6 @@ namespace PartyInvites.Migrations
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("WillAttend")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

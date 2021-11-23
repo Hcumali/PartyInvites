@@ -16,8 +16,8 @@ namespace PartyInvites.Migrations
                     Status = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    CategoryName = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false)
+                    CategoryName = table.Column<string>(maxLength: 30, nullable: false),
+                    Description = table.Column<string>(maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,10 +33,10 @@ namespace PartyInvites.Migrations
                     Status = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    PartyName = table.Column<string>(nullable: true),
+                    PartyName = table.Column<string>(maxLength: 21, nullable: false),
                     PartyDate = table.Column<DateTime>(nullable: false),
                     PartyType = table.Column<int>(nullable: false),
-                    TicketPrice = table.Column<int>(nullable: true)
+                    TicketPrice = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,7 +52,7 @@ namespace PartyInvites.Migrations
                     Status = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(maxLength: 40, nullable: false),
                     Role = table.Column<int>(nullable: false),
                     PartyId = table.Column<int>(nullable: false)
                 },
@@ -76,10 +76,9 @@ namespace PartyInvites.Migrations
                     Status = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
-                    Age = table.Column<string>(nullable: true),
-                    WillAttend = table.Column<bool>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Phone = table.Column<string>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
