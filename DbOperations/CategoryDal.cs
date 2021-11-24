@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PartyInvites.Context;
 using PartyInvites.Models;
+using PartyInvites.Models.ViewModels;
 
 namespace PartyInvites.DbOperations
 {
@@ -51,5 +52,9 @@ namespace PartyInvites.DbOperations
             return category;
         }
 
+        public void Create(UserCreateForm userCreateForm)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

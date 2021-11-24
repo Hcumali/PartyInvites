@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PartyInvites.Context;
 using PartyInvites.Models;
+using PartyInvites.Models.ViewModels;
 
 namespace PartyInvites.DbOperations
 {
@@ -49,6 +50,11 @@ namespace PartyInvites.DbOperations
         {
             Party party = _db.Parties.Find(id);
             return party;
+        }
+
+        public void Create(UserCreateForm userCreateForm)
+        {
+            throw new NotImplementedException();
         }
     }
 }

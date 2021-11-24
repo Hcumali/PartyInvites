@@ -10,7 +10,7 @@ namespace PartyInvites.Models
     public class Party : BaseEntity
     {
         [Required(ErrorMessage = "Parti adı boş girilemez.")]
-        [StringLength(21)]
+        [StringLength(35, ErrorMessage = "Parti adı 35 haneden fazla olamaz.")]
         public string PartyName { get; set; }
 
         [Required(ErrorMessage = "Parti tarihi boş girilemez.")]

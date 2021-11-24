@@ -14,16 +14,20 @@
     }
 }
 
-@for (int i = 0; i < Model.Count; i++)
-{
+<div style="display:flex; flex-direction:row; justify-content:center;margin-top:5rem;">
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
         <div class="card text-center" style="width: 18rem;padding:15px;margin:15px;align-items:center;">
             <img src="~/assets/party.jpg" style="width:12rem;height:14rem;" class="card-img-top" alt="IMAGE_PARTY">
             <div class="card-body" style="align-items:center">
                 <h6 class="card-title">@Model[i].PartyName</h6>
-                <label >@Model[i].PartyType</label><br />
-                <label >@Model[i].PartyDate.ToShortDateString()</label><br />
-                <label >@Model[i].TicketPrice $</label><br />
+                <label>@Model[i].PartyType</label><br />
+                <label>@Model[i].PartyDate.ToShortDateString()</label><br />
+                <label>@Model[i].TicketPrice $</label><br />
             </div>
             <a href="#" class="btn btn-primary">Sen de Katıl</a>
         </div>
-}
+    }
+
+</div>

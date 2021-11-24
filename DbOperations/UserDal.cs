@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PartyInvites.Context;
 using PartyInvites.Models;
+using PartyInvites.Models.ViewModels;
 
 namespace PartyInvites.DbOperations
 {
@@ -22,10 +23,12 @@ namespace PartyInvites.DbOperations
 
         public void Create(User user)
         {
-            _db.Users.Add(user);
-            // detail add
-            //_db.UserDetails.Add(user.UserDetail)
+        }
 
+        public void Create(UserCreateForm userCreateForm)
+        {
+            _db.Users.Add(userCreateForm.User);
+            _db.UserDetails.Add(userCreateForm.UserDetail);
             _db.SaveChanges();
         }
 

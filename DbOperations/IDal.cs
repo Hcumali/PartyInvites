@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PartyInvites.Models.ViewModels;
 
 namespace PartyInvites.DbOperations
 {
@@ -9,6 +10,7 @@ namespace PartyInvites.DbOperations
     {
         List<T> Read();
         void Create(T parameter);
+        void Create(UserCreateForm userCreateForm);
         void Delete(int id);
         void Update(T parameter);
         T Find(int id);
