@@ -7,28 +7,14 @@ using PartyInvites.Models.ViewModels;
 
 namespace PartyInvites.DbOperations
 {
-    public class PartyDal : IDal<Party>
+    public class PartyDal : BaseDal<Party>,IDal<Party>
     {
         CodeFirstContext _db;
-        public PartyDal(CodeFirstContext db)
+        public PartyDal(CodeFirstContext db) : base(db)
         {
             _db = db;
         }
-
-
-        public List<Party> Read()
-        {
-            List<Party> parties = _db.Parties.ToList();
-            return parties;
-        }
-
-        public void Create(Party party)
-        {
-            _db.Parties.Add(party);
-            _db.SaveChanges();
-        }
-
-        public void Delete(int id)
+        public override void Delete(int id)
         {
             Party party = _db.Parties.Find(id);
             party.Status = Enums.DataStatus.Deleted;
@@ -38,7 +24,7 @@ namespace PartyInvites.DbOperations
             _db.SaveChanges();
         }
 
-        public void Update(Party party)
+        public override void Update(Party party)
         {
             party.Status = Enums.DataStatus.Updated;
             party.ModifiedDate = DateTime.Now;
@@ -46,15 +32,6 @@ namespace PartyInvites.DbOperations
             _db.SaveChanges();
         }
 
-        public Party Find(int id)
-        {
-            Party party = _db.Parties.Find(id);
-            return party;
-        }
-
-        public void Create(UserCreateForm userCreateForm)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

@@ -13,7 +13,10 @@ namespace PartyInvites.DbOperations
         {
             _dal = dal;
             _setEntity = _dal.Set<T>();
+
         }
+        private IQueryable<T> _entites;
+        public IQueryable<T> Table => _entites ?? (_entites = _setEntity.AsQueryable());
 
         public virtual void Create(T parameter)
         {
@@ -21,7 +24,7 @@ namespace PartyInvites.DbOperations
             _dal.SaveChanges();
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             var deletedEntity = _setEntity.Find(id);
             _setEntity.Remove(deletedEntity);
@@ -29,17 +32,17 @@ namespace PartyInvites.DbOperations
             
         }
 
-        public T Find(int id)
+        public virtual T Find(int id)
         {
             return _setEntity.Find(id);
         }
 
-        public List<T> Read()
+        public virtual List<T> Read()
         {
             return _setEntity.ToList();
         }
 
-        public void Update(T parameter)
+        public virtual void Update(T parameter)
         {
             _setEntity.Update(parameter);
             _dal.SaveChanges();

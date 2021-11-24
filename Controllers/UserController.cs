@@ -7,7 +7,7 @@ using PartyInvites.Context;
 using PartyInvites.DbOperations;
 using PartyInvites.Models;
 using PartyInvites.Models.ViewModels;
-
+using Microsoft.EntityFrameworkCore;
 namespace PartyInvites.Controllers
 {
     public class UserController : Controller
@@ -24,8 +24,42 @@ namespace PartyInvites.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<User> users = _dal.Read();
+            List<User> users = _dal.Table.Include(x=>x.UserDetail).Include(x=>x.Party).ToList();
             return View(users);
+        }
+        [HttpPost]
+        public IActionResult Search(string search = "")
+        {
+            
+            search = search.ToLower();
+
+            var result = _dal.Table.Include(x => x.UserDetail).Include(x => x.Party).Where(x =>
+                                                            x.UserName.ToLower().Contains(search) ||
+                                                            x.UserDetail.Email.ToLower().Contains(search) ||
+                                                            x.Party.PartyName.ToLower().Contains(search));
+            var role = StringParseToEnum(search);
+
+            if (role != null)
+            {
+                result = result.Where(x => x.Role == role.Value);
+            }
+            var model = result.ToList();
+            return View("Index",model);
+            
+        }
+
+        private Enums.Role? StringParseToEnum(string name)
+        {
+            name = name.ToLower();
+            if (Enums.Role.Visitor.ToString().ToLower() == name)
+            {
+                return Enums.Role.Visitor;
+            }
+            else if(Enums.Role.Manager.ToString().ToLower() == name)
+            {
+                return Enums.Role.Manager;
+            }
+            return null;
         }
 
         [HttpPost]

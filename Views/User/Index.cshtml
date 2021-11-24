@@ -16,6 +16,12 @@
 
 <h3 class="text-center">Katılımcılar</h3>
 
+@Html.BeginForm("Search","User",null,FormMethod.Post)
+{
+    <input  class="form-control" type="text" placeholder="Search ... " name="search" id="search" />
+    <button class="btn btn-success" type="submit">Search..</button>
+}
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -39,7 +45,7 @@
                 <td>@Model[i].UserDetail.Email</td>
                 <td>@Model[i].UserDetail.Phone</td>
                 <td>@Model[i].UserDetail.Age</td>
-                <td>@Model[i].PartyId</td>
+                <td>@Model[i].Party.PartyName</td>
                 <td>
                     <a class="btn btn-info btn-sm" asp-controller="User" asp-action="Update" asp-route-id="@Model[i].Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>
                     <a class="btn btn-danger btn-sm" asp-controller="User" asp-action="Delete" asp-route-id="@Model[i].Id"><span class="glyphicon glyphicon-remove"></span> Remove </a>
