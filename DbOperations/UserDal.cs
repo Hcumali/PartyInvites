@@ -7,53 +7,12 @@ using PartyInvites.Models.ViewModels;
 
 namespace PartyInvites.DbOperations
 {
-    public class UserDal : IDal<User>
+    public class UserDal : BaseDal<User>, IDal<User>
     {
         CodeFirstContext _db;
-        public UserDal(CodeFirstContext db)
+        public UserDal(CodeFirstContext db) : base(db)
         {
             _db = db;
-        }
-
-        public List<User> Read()
-        {
-            List<User> users = _db.Users.ToList();
-            return users;
-        }
-
-        public void Create(User user)
-        {
-        }
-
-        public void Create(UserCreateForm userCreateForm)
-        {
-            _db.Users.Add(userCreateForm.User);
-            _db.UserDetails.Add(userCreateForm.UserDetail);
-            _db.SaveChanges();
-        }
-
-        public void Delete(int id)
-        {
-            User user = _db.Users.Find(id);
-            user.Status = Enums.DataStatus.Deleted;
-            user.ModifiedDate = DateTime.Now;
-            // Soft Delete for doesnt lose the data
-            _db.Users.Update(user);
-            _db.SaveChanges();
-        }
-
-        public void Update(User user)
-        {
-            user.Status = Enums.DataStatus.Updated;
-            user.ModifiedDate = DateTime.Now;
-            _db.Users.Update(user);
-            _db.SaveChanges();
-        }
-
-        public User Find(int id)
-        {
-            User party = _db.Users.Find(id);
-            return party;
         }
     }
 }

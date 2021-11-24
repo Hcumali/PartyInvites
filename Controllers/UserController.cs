@@ -33,11 +33,20 @@ namespace PartyInvites.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dal.Create(userCreateForm);
+                var user = new User 
+                { 
+                    UserName = userCreateForm.User.UserName,
+                    Role = userCreateForm.User.Role,
+                    PartyId = userCreateForm.PartyId,
+                    UserDetail = userCreateForm.UserDetail,
+                
+                };
+                _dal.Create(user);
                 return RedirectToAction("Index");
             }
             else
             {
+                userCreateForm.Parties = _dal1.Read();
                 return View(userCreateForm);
             }
         }
@@ -46,8 +55,9 @@ namespace PartyInvites.Controllers
         public IActionResult Create()
         {
             // Varolan parti listesini dropdownda sıralamak için..
+            // .Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = x.PartyName, Text = x.PartyName}).ToList()
             List<Party> parties = _dal1.Read();
-            UserCreateForm userCreateForm = new UserCreateForm() { Parties = parties.Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = x.PartyName, Text = x.PartyName}).ToList() };
+            UserCreateForm userCreateForm = new UserCreateForm() { Parties = parties };
             return View(userCreateForm);
         }
 

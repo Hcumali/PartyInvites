@@ -27,10 +27,19 @@ namespace PartyInvites
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<CodeFirstContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<CodeFirstContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IDal<Category>, CategoryDal>();
             services.AddScoped<IDal<Party>, PartyDal>();
             services.AddScoped<IDal<User>, UserDal>();
+
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<CodeFirstContext>(options => options.UseSqlServer(connectionString));
+
+            var optionsBuilder = new DbContextOptionsBuilder<CodeFirstContext>().UseSqlServer(connectionString);
+
+            using var dbcontext = new CodeFirstContext(optionsBuilder.Options);
+            
+            dbcontext.Database.Migrate();
 
         }
 

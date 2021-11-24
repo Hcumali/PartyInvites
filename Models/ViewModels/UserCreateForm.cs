@@ -10,6 +10,8 @@ namespace PartyInvites.Models.ViewModels
     {
         public User User { get; set; }
         public UserDetail UserDetail { get; set; }
-        public List<SelectListItem> Parties { get; set; }
+
+        public int PartyId { get; set; }
+        public List<Party> Parties { get; set; }
     }
 }

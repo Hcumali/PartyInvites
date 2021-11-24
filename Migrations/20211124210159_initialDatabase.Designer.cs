@@ -10,8 +10,8 @@ using PartyInvites.Context;
 namespace PartyInvites.Migrations
 {
     [DbContext(typeof(CodeFirstContext))]
-    [Migration("20211123202056_init")]
-    partial class init
+    [Migration("20211124210159_initialDatabase")]
+    partial class initialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,8 +70,8 @@ namespace PartyInvites.Migrations
 
                     b.Property<string>("PartyName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(21)")
-                        .HasMaxLength(21);
+                        .HasColumnType("nvarchar(35)")
+                        .HasMaxLength(35);
 
                     b.Property<int>("PartyType")
                         .HasColumnType("int");

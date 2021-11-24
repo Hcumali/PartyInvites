@@ -10,7 +10,6 @@ namespace PartyInvites.DbOperations
     {
         List<T> Read();
         void Create(T parameter);
-        void Create(UserCreateForm userCreateForm);
         void Delete(int id);
         void Update(T parameter);
         T Find(int id);

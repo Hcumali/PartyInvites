@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PartyInvites.Migrations
 {
-    public partial class init : Migration
+    public partial class initialDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +33,7 @@ namespace PartyInvites.Migrations
                     Status = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    PartyName = table.Column<string>(maxLength: 21, nullable: false),
+                    PartyName = table.Column<string>(maxLength: 35, nullable: false),
                     PartyDate = table.Column<DateTime>(nullable: false),
                     PartyType = table.Column<int>(nullable: false),
                     TicketPrice = table.Column<int>(nullable: false)
