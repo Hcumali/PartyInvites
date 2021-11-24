@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Anasayfa";
+﻿@model List<User>
+
+@{
+    ViewData["Title"] = "Katılımcılar";
 }
 
 @section Header{
@@ -7,9 +9,44 @@
         <div class="container px-4 text-center">
             <h1 class="fw-bolder">PARTY</h1>
             <p class="lead">Bütün arkadaşların bu partide!</p>
-            <a class="btn btn-lg btn-light" asp-controller="home" asp-action="KayitForm">Partiye Katılmak İçin Tıkla</a>
+            <a class="btn btn-lg btn-light" asp-controller="User" asp-action="Create">Partiye Katılmak İçin Tıkla</a>
         </div>
     </header>
 }
 
-<h1>Katılımcılar- userleri listele agam</h1>
+<h3 class="text-center">Katılımcılar</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">İsim Soyisim</th>
+            <th scope="col">Rolü</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">Yaş</th>
+            <th scope="col">Katılacağı Parti</th>
+            <th scope="col">Aksiyonlar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <th scope="row">@(i+1)</th>
+                <td>@Model[i].UserName</td>
+                <td>@Model[i].Role</td>
+                <td>@Model[i].UserDetail.Email</td>
+                <td>@Model[i].UserDetail.Phone</td>
+                <td>@Model[i].UserDetail.Age</td>
+                <td>@Model[i].PartyId</td>
+                <td>
+                    <a class="btn btn-info btn-sm" asp-controller="User" asp-action="Update" asp-route-id="@Model[i].Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="User" asp-action="Delete" asp-route-id="@Model[i].Id"><span class="glyphicon glyphicon-remove"></span> Remove </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

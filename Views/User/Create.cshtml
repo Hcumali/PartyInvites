@@ -1,11 +1,16 @@
 ﻿@model UserCreateForm
 @using PartyInvites.Enums
 
+@{
+    ViewData["Title"] = "Kayıt Ekle";
+}
+
 <style>
     .form-group {
         margin-top: 6px;
         margin-bottom: 6px;
     }
+
     h1 {
         text-align: center;
         margin: 20px;
@@ -43,15 +48,15 @@
     <div class="form-group">
         <label>Girmek istediğiniz partiyi seçiniz.</label>
         @*<select asp-items="Model.Parties" class="form-control">
-            <option value="">Parti Seçiniz</option>
-        </select>
+                <option value="">Parti Seçiniz</option>
+            </select>
         *@
-        @Html.DropDownListFor(m=>m.PartyId, new SelectList(
-                         Model.Parties, 
-                         "Id", 
+        @Html.DropDownListFor(m => m.PartyId, new SelectList(
+                         Model.Parties,
+                         "Id",
                          "PartyName"),
-                        "Parti Seçiniz", new {id="PartyId",@class="Form-control"})
-    )
+                        "Parti Seçiniz", new { id = "PartyId", @class = "Form-control" })
+        )
 
     </div>
 
