@@ -28,10 +28,11 @@ namespace PartyInvites.DbOperations
         {
             var searchWord = search.ToLower();
 
+            var enumType = EnumParser(searchWord);
 
             var results = _db.Users.Where(x => 
                                         x.UserName.ToLower().Contains(searchWord) ||
-                                        x.Role.
+                                        x.Role == enumType
                                        // x.UserDetail.Email.ToLower().Contains(searchWord) || 
                                        // x.UserDetail.Phone.Contains(searchWord) || 
                                         //x.UserDetail.Age.ToString() == searchWord|| 
@@ -42,13 +43,13 @@ namespace PartyInvites.DbOperations
             return results;
         }
 
-        private string EnumParser(string word)
+        private Enums.Role EnumParser(string word)
         {
             if(word == "manager")
             {
-                return "1";
+                return Enums.Role.Manager;
             }
-            return "2";
+            return Enums.Role.Visitor;
         }
 
 
