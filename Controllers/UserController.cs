@@ -27,39 +27,16 @@ namespace PartyInvites.Controllers
             List<User> users = _dal.Table.Include(x=>x.UserDetail).Include(x=>x.Party).ToList();
             return View(users);
         }
+
         [HttpPost]
         public IActionResult Search(string search = "")
         {
-            
-            search = search.ToLower();
-
-            var result = _dal.Table.Include(x => x.UserDetail).Include(x => x.Party).Where(x =>
+            var searchWord = search.ToLower();
+            var results = _dal.Table.Include(x => x.UserDetail).Include(x => x.Party).Where(x =>
                                                             x.UserName.ToLower().Contains(search) ||
                                                             x.UserDetail.Email.ToLower().Contains(search) ||
-                                                            x.Party.PartyName.ToLower().Contains(search));
-            var role = StringParseToEnum(search);
-
-            if (role != null)
-            {
-                result = result.Where(x => x.Role == role.Value);
-            }
-            var model = result.ToList();
-            return View("Index",model);
-            
-        }
-
-        private Enums.Role? StringParseToEnum(string name)
-        {
-            name = name.ToLower();
-            if (Enums.Role.Visitor.ToString().ToLower() == name)
-            {
-                return Enums.Role.Visitor;
-            }
-            else if(Enums.Role.Manager.ToString().ToLower() == name)
-            {
-                return Enums.Role.Manager;
-            }
-            return null;
+                                                            x.Party.PartyName.ToLower().Contains(search)).ToList();
+            return View("Index", results);
         }
 
         [HttpPost]
@@ -86,12 +63,14 @@ namespace PartyInvites.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int? partyId)
         {
-            // Varolan parti listesini dropdownda sıralamak için..
-            // .Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = x.PartyName, Text = x.PartyName}).ToList()
             List<Party> parties = _dal1.Read();
             UserCreateForm userCreateForm = new UserCreateForm() { Parties = parties };
+            if (partyId.HasValue)
+            {
+                userCreateForm.PartyId = partyId.Value;
+            }
             return View(userCreateForm);
         }
 

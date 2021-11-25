@@ -47,17 +47,8 @@
     <!--Parti Listesi-->
     <div class="form-group">
         <label>Girmek istediğiniz partiyi seçiniz.</label>
-        @*<select asp-items="Model.Parties" class="form-control">
-                <option value="">Parti Seçiniz</option>
-            </select>
-        *@
-        @Html.DropDownListFor(m => m.PartyId, new SelectList(
-                         Model.Parties,
-                         "Id",
-                         "PartyName"),
-                        "Parti Seçiniz", new { id = "PartyId", @class = "Form-control" })
-        )
-
+        @Html.DropDownListFor(m => m.PartyId, 
+                new SelectList(Model.Parties, "Id", "PartyName"), "Parti Seçiniz", new { id = "PartyId", @class = "form-control" })
     </div>
 
     <div class="row justify-content-center">

@@ -26,7 +26,7 @@
                 <label>@Model[i].PartyDate.ToShortDateString()</label><br />
                 <label>@Model[i].TicketPrice $</label><br />
             </div>
-            <a href="#" class="btn btn-primary">Sen de Katıl</a>
+            <a class="btn btn-primary" asp-controller="User" asp-action="Create" asp-route-partyId="@Model[i].Id">Sen de Katıl</a>
         </div>
     }
 
