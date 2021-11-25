@@ -14,6 +14,8 @@ namespace PartyInvites.DbOperations
         {
             _db = db;
         }
+
+
         public override void Delete(int id)
         {
             Party party = _db.Parties.Find(id);
@@ -32,6 +34,5 @@ namespace PartyInvites.DbOperations
             _db.SaveChanges();
         }
 
-       
     }
 }

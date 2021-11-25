@@ -23,13 +23,9 @@ namespace PartyInvites.DbOperations
             _setEntity.Add(parameter);
             _dal.SaveChanges();
         }
-
-        public virtual void Delete(int id)
+        public virtual List<T> Read()
         {
-            var deletedEntity = _setEntity.Find(id);
-            _setEntity.Remove(deletedEntity);
-            _dal.SaveChanges();
-            
+            return _setEntity.ToList();
         }
 
         public virtual T Find(int id)
@@ -37,9 +33,11 @@ namespace PartyInvites.DbOperations
             return _setEntity.Find(id);
         }
 
-        public virtual List<T> Read()
+        public virtual void Delete(int id)
         {
-            return _setEntity.ToList();
+            var deletedEntity = _setEntity.Find(id);
+            _setEntity.Remove(deletedEntity);
+            _dal.SaveChanges();
         }
 
         public virtual void Update(T parameter)

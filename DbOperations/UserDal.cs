@@ -14,5 +14,24 @@ namespace PartyInvites.DbOperations
         {
             _db = db;
         }
+
+        public override void Delete(int id)
+        {
+            User user = _db.Users.Find(id);
+            user.Status = Enums.DataStatus.Deleted;
+            user.ModifiedDate = DateTime.Now;
+            // Soft Delete for doesnt lose the data
+            _db.Users.Update(user);
+            _db.SaveChanges();
+        }
+
+        public override void Update(User user)
+        {
+            user.Status = Enums.DataStatus.Updated;
+            user.ModifiedDate = DateTime.Now;
+            _db.Users.Update(user);
+            _db.SaveChanges();
+        }
+
     }
 }
