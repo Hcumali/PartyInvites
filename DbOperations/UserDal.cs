@@ -32,11 +32,11 @@ namespace PartyInvites.DbOperations
 
             var results = _db.Users.Where(x => 
                                         x.UserName.ToLower().Contains(searchWord) ||
-                                        x.Role == enumType
-                                       // x.UserDetail.Email.ToLower().Contains(searchWord) || 
-                                       // x.UserDetail.Phone.Contains(searchWord) || 
-                                        //x.UserDetail.Age.ToString() == searchWord|| 
-                                        //x.Party.PartyName.ToLower().Contains(searchWord)
+                                        x.Role == enumType ||
+                                        x.UserDetail.Email.ToLower().Contains(searchWord) ||
+                                        x.UserDetail.Phone.Contains(searchWord) || 
+                                        x.UserDetail.Age.ToString() == searchWord ||
+                                        x.Party.PartyName.ToLower().Contains(searchWord) 
                                         )
                                     .Where(user => user.Status != Enums.DataStatus.Deleted)
                                     .Include(x => x.UserDetail).Include(x => x.Party).ToList();
