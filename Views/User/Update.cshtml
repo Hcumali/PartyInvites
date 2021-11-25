@@ -1,0 +1,56 @@
+﻿@model UserCreateForm
+@using PartyInvites.Enums
+
+@{
+    ViewData["Title"] = "Kayıt Güncelle";
+}
+
+<style>
+    .form-group {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+    h1 {
+        text-align: center;
+        margin: 20px;
+    }
+</style>
+
+<form asp-controller="User" asp-action="Update" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="User.UserName">İsim Soyisim</label>
+        <input type="text" class="form-control" asp-for="User.UserName">
+    </div>
+    <div class="form-group">
+        <label asp-for="User.Role">Giriş Amacınız (Rol)</label>
+        <select asp-for="User.Role" class="form-control">
+            <option value="">Rol Seçiniz</option>
+            <option>@Role.Manager</option>
+            <option>@Role.Visitor</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserDetail.Email">E-Mail</label>
+        <input type="email" class="form-control" asp-for="UserDetail.Email">
+    </div>
+    <div class="form-group">
+        <label asp-for="UserDetail.Phone">Telefon Numarası</label>
+        <input type="text" class="form-control" asp-for="UserDetail.Phone">
+    </div>
+    <div class="form-group">
+        <label asp-for="UserDetail.Age">Yaş</label>
+        <input type="number" class="form-control" asp-for="UserDetail.Age">
+    </div>
+    <!--Parti Listesi-->
+    <div class="form-group">
+        <label>Girmek istediğiniz partiyi seçiniz.</label>
+        @Html.DropDownListFor(m => m.PartyId,
+                new SelectList(Model.Parties, "Id", "PartyName"), "Parti Seçiniz", new { id = "PartyId", @class = "form-control" })
+    </div>
+
+    <div class="row justify-content-center">
+        <button type="submit" class="btn btn-primary align-baseline" style="width:8rem; margin: 15px">Güncelle</button>
+    </div>
+</form>

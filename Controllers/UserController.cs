@@ -24,18 +24,14 @@ namespace PartyInvites.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<User> users = _dal.Table.Include(x=>x.UserDetail).Include(x=>x.Party).ToList();
+            List<User> users = _dal.Read();
             return View(users);
         }
 
         [HttpPost]
-        public IActionResult Search(string search = "")
+        public IActionResult Search(string searchWord)
         {
-            var searchWord = search.ToLower();
-            var results = _dal.Table.Include(x => x.UserDetail).Include(x => x.Party).Where(x =>
-                                                            x.UserName.ToLower().Contains(search) ||
-                                                            x.UserDetail.Email.ToLower().Contains(search) ||
-                                                            x.Party.PartyName.ToLower().Contains(search)).ToList();
+            var results = _dal.GetSearchedData(searchWord);
             return View("Index", results);
         }
 

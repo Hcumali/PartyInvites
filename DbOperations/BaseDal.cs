@@ -15,8 +15,6 @@ namespace PartyInvites.DbOperations
             _setEntity = _dal.Set<T>();
 
         }
-        private IQueryable<T> _entites;
-        public IQueryable<T> Table => _entites ?? (_entites = _setEntity.AsQueryable());
 
         public virtual void Create(T parameter)
         {
@@ -44,6 +42,11 @@ namespace PartyInvites.DbOperations
         {
             _setEntity.Update(parameter);
             _dal.SaveChanges();
+        }
+
+        public virtual List<T> GetSearchedData(string search = "")
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
