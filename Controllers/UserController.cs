@@ -24,8 +24,8 @@ namespace PartyInvites.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<User> users = _dal.Read();
-            return View(users);
+            // The ViewComponent in this view
+            return View();
         }
 
         [HttpPost]

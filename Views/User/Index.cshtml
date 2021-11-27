@@ -1,18 +1,6 @@
-﻿@model List<User>
-
-@{
+﻿@{
     ViewData["Title"] = "Katılımcılar";
 }
-
-<style>
-    #div_search {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        margin-top: 3rem;
-        margin-bottom: 4rem;
-    }
-</style>
 
 <h3 class="text-center">Katılımcılar</h3>
 
@@ -23,37 +11,6 @@
     </div>
 </form>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">İsim Soyisim</th>
-            <th scope="col">Rolü</th>
-            <th scope="col">Email</th>
-            <th scope="col">Telefon</th>
-            <th scope="col">Yaş</th>
-            <th scope="col">Katılacağı Parti</th>
-            <th scope="col">Aksiyonlar</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <tr>
-                <th scope="row">@(i+1)</th>
-                <td>@Model[i].UserName</td>
-                <td>@Model[i].Role</td>
-                <td>@Model[i].UserDetail.Email</td>
-                <td>@Model[i].UserDetail.Phone</td>
-                <td>@Model[i].UserDetail.Age</td>
-                <td>@Model[i].Party.PartyName</td>
-                <td>
-                    <a class="btn btn-info btn-sm" asp-controller="User" asp-action="Update" asp-route-id="@Model[i].Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                    <a class="btn btn-danger btn-sm" asp-controller="User" asp-action="Delete" asp-route-id="@Model[i].Id"><span class="glyphicon glyphicon-remove"></span> Remove </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@await Component.InvokeAsync("UsersTable")
 
 
